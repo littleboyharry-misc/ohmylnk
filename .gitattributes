@@ -1,0 +1,4 @@
+*.bat eol=crlf
+*.cmd eol=crlf
+*.ps1 eol=crlf working-tree-encoding=utf-16le-bom
+*.lnk binary
