@@ -13,6 +13,7 @@ $names = switch ( (Get-WinSystemLocale).Name ) {
             restartexp       = '重启文件资源管理器';
             enable_hyperv    = '激活 - HyperV';
             disable_hyperv   = '关闭 - HyperV';
+            clear_histpwsh   = '清除 - PowerShell 历史记录';
         }
     }
     default {
@@ -26,6 +27,7 @@ $names = switch ( (Get-WinSystemLocale).Name ) {
             restartexp       = 'Restart Explorer';
             enable_hyperv    = 'Enable - HyperV';
             disable_hyperv   = 'Disable - HyperV';
+            clear_histpwsh   = 'Clear - History of PowerShell';
         }
     }
 }
@@ -62,6 +64,11 @@ function Set-ShortcutRestartIcon {
 function Set-ShortcutEditIcon {
     param($shortcut)
     $shortcut.IconLocation = "shell32.dll,269"
+}
+
+function Set-ShortcutDeleteFileIcon {
+    param($shortcut)
+    $shortcut.IconLocation = "shell32.dll,152"
 }
 
 $it = New-Shortcut $names.enable_darkmode
@@ -116,3 +123,9 @@ $it.Description = $names.desc_reboot
 Set-ShortcutDisableIcon $it
 $it.Save()
 Set-ShortcutRequireAdmin $it
+
+$it = New-Shortcut $names.clear_histpwsh
+$it.TargetPath = "cmd"
+$it.Arguments = "/c del %APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+Set-ShortcutDeleteFileIcon $it
+$it.Save()
