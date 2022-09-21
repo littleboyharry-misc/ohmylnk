@@ -46,19 +46,21 @@ function Set-ShortcutRequireAdmin {
     [System.IO.File]::WriteAllBytes($path, $bytes)
 }
 
+$iswin11 = [Environment]::OSVersion.Version.Build -ge 22000
+
 function Set-ShortcutDisableIcon {
     param($shortcut)
-    $shortcut.IconLocation = "imageres.dll,229"
+    $shortcut.IconLocation = if ($iswin11) { "imageres.dll,230" }else { "imageres.dll,229" }
 }
 
 function Set-ShortcutEnableIcon {
     param($shortcut)
-    $shortcut.IconLocation = "imageres.dll,232"
+    $shortcut.IconLocation = if ($iswin11) { "imageres.dll,233" }else { "imageres.dll,232" }
 }
 
 function Set-ShortcutRestartIcon {
     param($shortcut)
-    $shortcut.IconLocation = "imageres.dll,228"
+    $shortcut.IconLocation = if ($iswin11) { "imageres.dll,229" }else { "imageres.dll,228" }
 }
 
 function Set-ShortcutEditIcon {
