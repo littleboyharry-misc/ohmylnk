@@ -23,7 +23,7 @@ $names = switch ( (Get-WinSystemLocale).Name ) {
             disable_darkmode   = 'Disable - Dark Mode';
             edit_hosts         = 'Edit - HOSTS';
             edit_desktopicon   = 'Edit - Desktop Icon';
-            flushdns           = 'flush DNS resolve'
+            flushdns           = 'Flush DNS resolve'
             restartexp         = 'Restart Explorer';
             enable_hyperv      = 'Enable - HyperV (need Reboot)';
             disable_hyperv     = 'Disable - HyperV (need Reboot)';
@@ -127,8 +127,8 @@ $it.Save()
 Set-ShortcutRequireAdmin $it
 
 $it = New-Shortcut $names.clear_histpwsh
-$it.TargetPath = "cmd"
-$it.Arguments = "/c del %APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
+$it.TargetPath = "powershell"
+$it.Arguments = "-c cmd /c del %APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt"
 Set-ShortcutDeleteFileIcon $it
 $it.Save()
 
