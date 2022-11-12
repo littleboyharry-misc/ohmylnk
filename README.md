@@ -1,3 +1,5 @@
+MIGRATE INTO https://github.com/setupfw/win-sf
+
 # Oh My Lnk
 
 Only one line command useful shortcuts.
